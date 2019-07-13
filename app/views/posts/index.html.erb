@@ -1,0 +1,8 @@
+<h1>購入商品一覧</h1>
+<% if user_signed_in? %>
+  <% @posts.each do |post| %>
+    <p><%= post.title %>：<%= post.category %>：会員No.<%= post.user.id %></p>
+  <% end %>
+<% else %>
+  <p>ログインしてください</p>
+<% end %>

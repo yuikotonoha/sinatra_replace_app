@@ -1,0 +1,6 @@
+<%= form_for @post, method: :post do |f| %>
+  <h1>ご購入商品の情報を入力</h1>
+  <p>タイトル：<%= f.text_field :title %></p>
+  <p>カテゴリ：<%= f.text_field :category %></p>
+  <input type="submit" value="SENT">
+<% end %>
