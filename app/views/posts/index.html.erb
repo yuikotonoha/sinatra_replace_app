@@ -1,9 +1,32 @@
-<h1>購入商品一覧</h1>
-<%= image_tag("header.jpg", :alt => "アイコン") %>
+<%= image_tag("header.jpg", :width => "100%", :alt => "化粧品・服・ウィッグの口コミを投稿しよう！") %>
 <% if user_signed_in? %>
-  <% @posts.each do |post| %>
-    <p><%= post.title %>：<%= post.category %>：会員No.<%= post.user.id %></p>
-  <% end %>
+
+  <div class="row show_images text-center">
+    <% @posts.each do |post| %>
+      <div class="col-xl-4 col-md-6 col-sm-12">
+        <!-- Content -->
+        <!-- <h2><%= post.title %></h2> -->
+        <a href='/show/<%= post['id'] %>/<%= @user_id %>'><img src="/images/post/<%= post['product_image'] %>"></a>
+        <p>投稿者:<%= post.user.nickname %></p>
+      </div>
+    <% end %>
+  </div>
+
 <% else %>
-  <p>ログインしてください</p>
+  <div class="row mt-3 top_lp">
+    <div class="col-6">
+      <!-- Content -->
+      <button type="button" class="btn btn-success mx-auto" width="80%">
+        <%= link_to "新規登録", new_user_registration_path, class: 'nav-item nav-link' %>
+      </button>
+    </div>
+    <div class="col-6 text-center">
+      <!-- Content -->
+      <button type="button" class="btn btn-primary mx-auto" width="80%">
+        <%= link_to "サインイン", new_user_session_path, class: 'nav-item nav-link' %>
+      </button>
+    </div>
+  </div>
 <% end %>
+
+

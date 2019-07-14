@@ -3,15 +3,26 @@
     <img src="/images/profile/<%= @user_image %>" width="200px">
   </div>
   <div class="name text-center">
-    <h1><%= @user_name %></h1>
+    <h1><%= @user.nickname %></h1>
   </div>
   <div class="text-center">
     <button type="button" class="btn btn-secondary">
-      <a class="btn btn-default" href="/profile_edit/<%= @user_id %>">プロフィールを編集する</a>
+<!--      <a class="btn btn-default" href="/profile_edit/<%#= @user_id %>">プロフィールを編集する</a>-->
+      <%= link_to "プロフィールを編集する", "/users/edit" %>
     </button>
   </div>
 </div>
 
-<% @posts.each do |post| %>
-  <p><%= post.title %>：<%= post.category %></p>
-<% end %>
+<!-- 投稿一覧 -->
+<div class="text-center mt-5 mb-5">
+  <h2><%= @user.nickname %>の投稿一覧</h2>
+</div>
+<div class="row show_images text-center">
+  <% @posts.each do |post| %>
+    <div class="col-xl-4 col-md-6 col-sm-12 mb-5">
+       <h3><%= post.title %></h3>
+      <a href='/show/<%= post['id'] %>/<%= @user_id %>'><img src="/images/post/<%= post['product_image'] %>"></a>
+      <p><a href='/'>一覧に戻る</a> | <a href='/edit/<%= post['id'] %>/<%= @user_id %>'>編集</a> | <a href='/destroy_check/<%= post['id'] %>/<%= @user_id %>'>削除</a></p>
+    </div>
+  <% end %>
+</div>

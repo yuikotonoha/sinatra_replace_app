@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
 
-  def signin
-
+  def index
+    @users = User.all
   end
 
   def show
-    if user_signed_in?
-      @posts = Post.where(user_id: current_user.id)
-    else
-      render :action => "signin"
-    end
+    @posts = Post.where(user_id: current_user.id)
+    @user = User.find_by(id: current_user.id)
   end
 
 

@@ -23,7 +23,8 @@ class PostsController < ApplicationController
 
   # postで投げられたデータを受け取る
   def create
-    Post.create(name: post_params[:title], price: post_params[:category], user_id: current_user.id)
+    # binding.pry
+    Post.create(title: post_params[:title], category: post_params[:category], user_id: current_user.id)
   end
 
   # ログインしていないユーザーをトップにリダイレクト

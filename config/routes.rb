@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   root to: 'posts#index'
   resources :posts
 
-  resources :users, only: :show
-  # get '/users/signin', to:'users#signin'
+  resources :users, only: [:index,:show]
+
 end
