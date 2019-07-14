@@ -32,7 +32,7 @@
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <% @nickname = User.find_by(id: current_user.id) %>
-            <%= @nickname.email %>
+            <%= @nickname.nickname %>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <%= link_to "マイページを表示", user_path(current_user.id), class: 'dropdown-item' %>
