@@ -2,7 +2,18 @@ class PostsController < ApplicationController
 
   # 投稿一覧を取得しインスタンス変数に代入
   def index
-    @posts = Post.all
+      @posts = Post.all
+      # ヘッダー表示させるために、変数に代入
+      # @nickname = User.find_by(id: current_user.id)
+
+    # if user_signed_in?
+    #   @posts = Post.all
+    #   # ヘッダー表示させるために、変数に代入
+    #   session[:nickname] = User.find_by(id: current_user.id)
+    #   @nickname = session[:nickname]
+    # else
+    #   redirect_to controller: 'users', action: 'signin'
+    # end
   end
 
   # オブジェクトを新規作成
