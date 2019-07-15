@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # userはたくさんのitemを持っている
   has_many :posts
+
+  # 画像アップロード機能
+  mount_uploader :image, ImageUploader
 end

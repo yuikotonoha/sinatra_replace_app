@@ -11,6 +11,13 @@
   </div>
   <!-- ここまで -->
 
+  <!--  プロフィール画像設定 ここから-->
+  <div class="field">
+    <%= f.label :image %> <em>(profile image)</em><br />
+    <%= f.file_field :image %>
+  </div>
+  <!--  プロフィール画像設定 ここまで-->
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

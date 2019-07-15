@@ -6,7 +6,8 @@
   <% @users.each do |user| %>
     <div class="col-xl-4 col-md-6 col-sm-12">
       <!-- Content -->
-      <a href='/user/<%= @user_id %>/<%= user['user_id'] %>'><img src="/images/profile/<%= user['profile_image_name'] %>"></a>
+<!--      <a href='/user/<%#= @user_id %>/<%#= user['user_id'] %>'><img src="/images/profile/<%#= user['profile_image_name'] %>"></a>-->
+      <%= image_tag user.image_url(:thumb) %>
       <p><%= user.nickname %></p>
     </div>
   <% end %>

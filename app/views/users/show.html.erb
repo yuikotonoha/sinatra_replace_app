@@ -1,15 +1,19 @@
 <div class="user_profile mt-5 mb-5">
   <div class="icon text-center">
-    <img src="/images/profile/<%= @user_image %>" width="200px">
+    <%= image_tag @user.image_url(:thumb) %>
   </div>
   <div class="name text-center">
     <h1><%= @user.nickname %></h1>
   </div>
   <div class="text-center">
     <button type="button" class="btn btn-secondary">
-<!--      <a class="btn btn-default" href="/profile_edit/<%#= @user_id %>">プロフィールを編集する</a>-->
       <%= link_to "プロフィールを編集する", "/users/edit" %>
     </button>
+
+    <button type="button" class="btn btn-secondary">
+    <%= link_to "削除する", "/users", method: :delete %>
+    </button>
+
   </div>
 </div>
 
