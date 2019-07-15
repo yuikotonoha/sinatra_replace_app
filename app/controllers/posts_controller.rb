@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   # postで投げられたデータを受け取る
   def create
     # binding.pry
-    Post.create(title: post_params[:title], category: post_params[:category], user_id: current_user.id)
+    Post.create(title: post_params[:title], category: post_params[:category], product_image: post_params[:product_image], user_id: current_user.id)
   end
 
   # ログインしていないユーザーをトップにリダイレクト
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-      params.require(:post).permit(:title, :category)
+      params.require(:post).permit(:title, :category, :product_image)
     end
 
 end
