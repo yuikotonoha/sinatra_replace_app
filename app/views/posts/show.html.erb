@@ -1,0 +1,26 @@
+<div class="text-center mt-5 mb-5">
+  <h2>アイテム詳細情報</h2>
+</div>
+
+<div class="row p-3">
+  <div class="col-md-4">
+    <div class="product_detail text-center">
+      <%= image_tag @post.product_image_url(:thumb) %>
+      <p class="like"><a href='/like/<%= @post_id %>/<%= @user_id %>'>♥</a><%= @like_count %></p>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h3 class="pt-3 pb-3 text-center"><%= @post.title %></h3>
+    <p class="text-center">カテゴリ：<%= @post.category %></p>
+    <div class="buttons text-center mb-3">
+      <a class="btn btn-lg btn-outline-warning" href="<%= @product_link %>"><i class="fab fa-amazon"></i>Amazonで詳しく見る</a>
+    </div>
+    <div class="buttons text-center">
+      <% if @like_check.nil? %>
+        <a class="btn btn-lg btn-outline-success" href="/like/<%= @post_id %>/<%= @user_id %>"><i class="far fa-heart"></i>お気に入り登録</a>
+      <% else %>
+        <a class="btn btn-lg btn-success" href="/like/<%= @post_id %>/<%= @user_id %>"><i class="fas fa-heart"></i>お気に入り登録中</a>
+      <% end %>
+    </div>
+  </div>
+</div>

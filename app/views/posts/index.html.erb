@@ -5,8 +5,10 @@
     <% @posts.each do |post| %>
       <div class="col-xl-4 col-md-6 col-sm-12">
         <!-- Content -->
-        <!-- <h2><%= post.title %></h2> -->
-        <%= link_to image_tag("kotonoha.png"), :action => "index" %>
+
+        <%= link_to post_path(post), class: "nav-item nav-link" do %>
+          <%= image_tag post.product_image_url(:thumb) %>
+        <% end %>
         <p>投稿者:<%= post.user.nickname %></p>
       </div>
     <% end %>

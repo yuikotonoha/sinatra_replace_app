@@ -8,4 +8,8 @@ class User < ApplicationRecord
 
   # 画像アップロード機能
   mount_uploader :image, ImageUploader
+
+  # 登録時のバリデーション
+  validates :nickname, presence: true
+  validates :image, presence: true
 end

@@ -2,18 +2,14 @@ class PostsController < ApplicationController
 
   # 投稿一覧を取得しインスタンス変数に代入
   def index
-      @posts = Post.all
-      # ヘッダー表示させるために、変数に代入
-      # @nickname = User.find_by(id: current_user.id)
+    @posts = Post.all
+    # binding.pry
+  end
 
-    # if user_signed_in?
-    #   @posts = Post.all
-    #   # ヘッダー表示させるために、変数に代入
-    #   session[:nickname] = User.find_by(id: current_user.id)
-    #   @nickname = session[:nickname]
-    # else
-    #   redirect_to controller: 'users', action: 'signin'
-    # end
+  # 投稿の詳細画面を表示
+  def show
+    # binding.pry
+    @post = Post.find_by(id: params[:id])
   end
 
   # オブジェクトを新規作成
@@ -24,12 +20,23 @@ class PostsController < ApplicationController
   # postで投げられたデータを受け取る
   def create
     # binding.pry
-    Post.create(title: post_params[:title], category: post_params[:category], product_image: post_params[:product_image], user_id: current_user.id)
+    Post.create(
+        title: post_params[:title],
+        category: post_params[:category],
+        product_image: post_params[:product_image],
+        user_id: current_user.id)
   end
 
   # ログインしていないユーザーをトップにリダイレクト
   def move_to_index
     redirect_to action: :index unless user_signed_in?
+  end
+
+  # 投稿を削除
+  def destroy
+    # binding.pry
+    post = Post.find(params[:id])
+    post.delete
   end
 
     private
