@@ -10,6 +10,8 @@ class PostsController < ApplicationController
   def show
     # binding.pry
     @post = Post.find_by(id: params[:id])
+    @comments = Comment.where(post_id: params[:id])
+    @comment = Comment.new
   end
 
   # オブジェクトを新規作成
@@ -19,12 +21,13 @@ class PostsController < ApplicationController
 
   # postで投げられたデータを受け取る
   def create
-    # binding.pry
+    binding.pry
     Post.create(
         title: post_params[:title],
         category: post_params[:category],
         product_image: post_params[:product_image],
         user_id: current_user.id)
+    redirect_to root_path
   end
 
   # ログインしていないユーザーをトップにリダイレクト
@@ -37,6 +40,7 @@ class PostsController < ApplicationController
     # binding.pry
     post = Post.find(params[:id])
     post.delete
+    redirect_to root_path
   end
 
     private

@@ -24,3 +24,62 @@
     </div>
   </div>
 </div>
+
+
+<% @comments.each do |comment| %>
+  <div class="row posts" id="<%= comment['comment_id'] %>">
+    <div class="col-md-2 posts-user">
+      <a href="/user/<%= @user_id %>/<%= comment['user_id'] %>">
+        <img width="100px" src="/images/profile/<%= comment['profile_image_name'] %>">
+      </a>
+      <p><%= comment['user_name'] %></p>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class=" posts-content">
+        <% time = Time.parse(comment['comment_time']) %>
+        <p><%= time.year %>年<%= time.mon %>月<%= time.mday %>日<%= time.hour %>時<%= time.min %>分に投稿されました。</p>
+        <h4 class="mb-3">評価：<%= comment['score'] %>点</h4>
+        <p><%= comment['commnet_text'] %></p>
+        <% if comment['comment_image'] %>
+          <img width="200px" src="/images/comment/<%= comment['comment_image'] %>" type="button" data-toggle="modal" data-target="#exampleModalScrollable<%= comment['comment_id'] %>" style="cursor: pointer">
+          <!-- Modal -->
+          <div class="modal" id="exampleModalScrollable<%= comment['comment_id'] %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenteredLabel">口コミ写真</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img width="350px" src="/images/comment/<%= comment['comment_image'] %>">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal END -->
+        <% end %>
+      </div>
+    </div>
+    <% if @user_id == comment['user_id'] %>
+      <div class="col-md-12 edit-button">
+        <div class="comment_delete">
+          <button type="button" class="btn btn-secondary">
+            <a href="/comment_edit/<%= @post_id %>/<%= @user_id %>/<%= comment['comment_id'] %>" class="btn btn-default">口コミを編集</a>
+          </button>
+          <button type="button" class="btn btn-secondary">
+            <a href="/comment_delete/<%= @post_id %>/<%= @user_id %>/<%= comment['comment_id'] %>" class="btn btn-default">口コミを削除</a>
+          </button>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-md-12 edit-button">
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "口コミを投稿する", new_comment_path %>
