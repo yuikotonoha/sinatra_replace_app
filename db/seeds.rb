@@ -5,6 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Post.create(title: "女装用ウィッグ", category: "ウィッグ", user_id: 1)
-Post.create(title: "ロリータ服", category: "女装服", user_id: 1)
-Post.create(title: "ファンデーション", category: "化粧品", user_id: 1)
+Comment.create(id: 1, comment_text: "aaa", post_id: 1, user_id: 1, comment_image: "test", score: "3",)

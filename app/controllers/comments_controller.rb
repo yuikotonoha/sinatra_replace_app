@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
   # 新しいコメントをテーブルに保存
   def create
-    # binding.pry
+    binding.pry
     Comment.create(
         score: comment_params[:score],
         comment_text: comment_params[:comment_text],
