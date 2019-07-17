@@ -6,6 +6,6 @@ class Comment < ApplicationRecord
   # belongs_to :post
 
   # 画像アップロード機能
-  mount_uploader :commnet_image, CommentimageUploader
+  mount_uploader :comment_image, CommentimageUploader
 
 end
