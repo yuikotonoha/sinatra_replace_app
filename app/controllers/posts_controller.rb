@@ -12,6 +12,9 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @comments = Comment.where(post_id: params[:id])
     @comment = Comment.new
+
+    #今見ている商品の口コミが投稿された場合、comment_controllerにpost_idを渡すための処理
+    cookies[:post_id] = params[:id]
   end
 
   # オブジェクトを新規作成

@@ -8,14 +8,14 @@ class CommentsController < ApplicationController
 
   # 新しいコメントをテーブルに保存
   def create
-    binding.pry
+    # binding.pry
     Comment.create(
         score: comment_params[:score],
         comment_text: comment_params[:comment_text],
         comment_image: comment_params[:comment_image],
-        post_id: params[:id],
+        post_id: cookies[:post_id], #app/controllers/posts_controller.rb からcookies[:post_id]を受け取る
         user_id: current_user.id)
-    redirect_to root_path
+    redirect_to post_path(cookies[:post_id])
   end
 
 

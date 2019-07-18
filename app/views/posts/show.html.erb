@@ -29,21 +29,21 @@
 <% @comments.each do |comment| %>
   <div class="row posts" id="<%= comment['comment_id'] %>">
     <div class="col-md-2 posts-user">
-      <a href="/user/<%= @user_id %>/<%= comment['user_id'] %>">
-        <img width="100px" src="/images/profile/<%= comment['profile_image_name'] %>">
-      </a>
-      <p><%= comment['user_name'] %></p>
+      <%= link_to user_path(comment.user_id), class: "nav-item nav-link" do %>
+        <%= image_tag comment.user.image_url(:thumb), :size => "100x100" %>
+      <% end %>
+      <p><%= comment.user.nickname %></p>
     </div>
     <div class="col-md-6 mb-3">
       <div class=" posts-content">
-        <% time = Time.parse(comment['comment_time']) %>
-        <p><%= time.year %>年<%= time.mon %>月<%= time.mday %>日<%= time.hour %>時<%= time.min %>分に投稿されました。</p>
-        <h4 class="mb-3">評価：<%= comment['score'] %>点</h4>
-        <p><%= comment['commnet_text'] %></p>
-        <% if comment['comment_image'] %>
-          <img width="200px" src="/images/comment/<%= comment['comment_image'] %>" type="button" data-toggle="modal" data-target="#exampleModalScrollable<%= comment['comment_id'] %>" style="cursor: pointer">
+
+        <p>口コミ投稿日時：<%= comment.created_at  %></p>
+        <h4 class="mb-3">評価：<%= comment.score %>点</h4>
+        <p><%= comment.comment_text %></p>
+        <% unless comment.comment_image.blank? %>
+          <img width="200px" src="<%= comment.comment_image %>" type="button" data-toggle="modal" data-target="#exampleModalScrollable<%= comment.id %>" style="cursor: pointer">
           <!-- Modal -->
-          <div class="modal" id="exampleModalScrollable<%= comment['comment_id'] %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+          <div class="modal" id="exampleModalScrollable<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -53,7 +53,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img width="350px" src="/images/comment/<%= comment['comment_image'] %>">
+                  <img width="350px" src="<%= comment.comment_image %>">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,7 +65,7 @@
         <% end %>
       </div>
     </div>
-    <% if @user_id == comment['user_id'] %>
+    <% if comment.user_id == current_user.id %>
       <div class="col-md-12 edit-button">
         <div class="comment_delete">
           <button type="button" class="btn btn-secondary">
@@ -83,3 +83,36 @@
 <% end %>
 
 <%= link_to "口コミを投稿する", new_comment_path %>
+<div class="text-center mt-5 mb-5">
+  <h2>口コミ投稿する</h2>
+</div>
+
+<%= form_for @comment, method: :post do |f| %>
+  <!-- 評価 -->
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="score">評価</label>
+    <div class="col-md-9">
+      <%= select :comment, :score, [["5", "5"], ["4", "4"], ["3", "3"], ["2", "2"], ["1", "1"]] %>
+    </div>
+  </div>
+  <!-- 口コミ内容 -->
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="comment_text">口コミ内容</label>
+    <div class="col-md-9">
+      <%= text_area :comment, :comment_text, :size=>"40x5" %>
+    </div>
+  </div>
+  <!-- 口コミ画像 -->
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="comment_image">口コミ画像</label>
+    <div class="col-md-9">
+      <%= f.file_field :comment_image %>
+    </div>
+  </div>
+  <input type="submit" value="内容を送信">
+<% end %>
+
+<%#= @post_id %>
+
+<!--今見ているのpost_idを表示させる-->
+<%= cookies[:post_id] %>
