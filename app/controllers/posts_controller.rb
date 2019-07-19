@@ -33,10 +33,12 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
 
+  # 商品編集画面に移動
   def edit
     @post = Post.find(params[:id])
   end
 
+  # 商品情報を更新
   def update
     post = Post.find(params[:id])
     post.update(post_params)

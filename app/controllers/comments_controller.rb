@@ -18,6 +18,29 @@ class CommentsController < ApplicationController
     redirect_to post_path(cookies[:post_id])
   end
 
+  def show
+  end
+
+  # 口コミ編集画面に移動
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  # 口コミ内容を更新
+  def update
+    # binding.pry
+    comment = Comment.find(params[:id])
+    comment.update(comment_params)
+    redirect_to post_path(cookies[:post_id])
+  end
+
+  # 口コミを削除
+  def destroy
+    # binding.pry
+    comment = Comment.find(params[:id])
+    comment.delete
+    redirect_to post_path(cookies[:post_id])
+  end
 
     private
 
