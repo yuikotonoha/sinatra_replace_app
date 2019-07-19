@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @posts = Post.where(user_id: current_user.id)
+    # binding.pry
     @posts = Post.where(user_id: params[:id])
     @user = User.find_by(id: params[:id])
   end

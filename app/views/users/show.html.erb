@@ -5,11 +5,13 @@
   <div class="name text-center">
     <h1><%= @user.nickname %></h1>
   </div>
+
   <div class="text-center">
+  <% if current_user.id.to_s == params[:id] %>
     <button type="button" class="btn btn-secondary">
-      <%#= link_to "プロフィールを編集する", "/users/edit" %>
-      <%= link_to "プロフィールを編集する", edit_user_registration_path %>
+        <%= link_to "プロフィールを編集する", edit_user_registration_path %>
     </button>
+  <% end %>
 
 <!--    <button type="button" class="btn btn-secondary">-->
     <%#= link_to "削除する", "/users", method: :delete, data: {confirm: "ユーザーを削除しますか?"} %>
@@ -29,7 +31,10 @@
       <%= link_to post_path(post), class: "nav-item nav-link" do %>
         <%= image_tag post.product_image_url(:thumb) %>
       <% end %>
-      <%= link_to '削除', post_path(post), method: :delete, data: {confirm: "投稿を削除しますか?"}  %>
+      <% if current_user.id.to_s == params[:id] %>
+        <%= link_to '編集', edit_post_path(post)  %>：
+        <%= link_to '削除', post_path(post), method: :delete, data: {confirm: "投稿を削除しますか?"}  %>
+      <% end %>
     </div>
   <% end %>
 </div>
