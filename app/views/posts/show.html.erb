@@ -19,7 +19,7 @@
     </div>
     <div class="buttons text-center">
       <% if @like_check.nil? %>
-        <a class="btn btn-lg btn-outline-success" href="/like/<%= @post_id %>/<%= @user_id %>"><i class="far fa-heart"></i>お気に入り登録</a>
+        <a class="btn btn-lg btn-outline-success" href="/likes/<%= @post.id %>"><i class="far fa-heart"></i>お気に入り登録</a>
       <% else %>
         <a class="btn btn-lg btn-success" href="/like/<%= @post_id %>/<%= @user_id %>"><i class="fas fa-heart"></i>お気に入り登録中</a>
       <% end %>

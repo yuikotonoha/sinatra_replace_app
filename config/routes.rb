@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments
 
+  # お気に入り追加・削除
+  get '/likes/:id', to: 'likes#touch'
+
   resources :users, only: [:index,:show]
 
 end
