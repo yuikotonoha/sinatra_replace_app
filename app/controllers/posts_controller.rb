@@ -34,6 +34,7 @@ class PostsController < ApplicationController
         category: post_params[:category],
         product_image: post_params[:product_image],
         user_id: current_user.id)
+    flash[:success] = '女装アイテムを投稿しました'
     redirect_to root_path
   end
 
@@ -46,6 +47,7 @@ class PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     post.update(post_params)
+    flash[:success] = '女装アイテムを投稿しました'
     redirect_to user_path(current_user.id)
   end
 
@@ -60,6 +62,7 @@ class PostsController < ApplicationController
     # binding.pry
     post = Post.find(params[:id])
     post.delete
+    flash[:danger] = '女装アイテムを削除しました'
     redirect_to root_path
   end
 

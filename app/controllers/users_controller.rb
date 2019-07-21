@@ -16,9 +16,23 @@ class UsersController < ApplicationController
     cookies[:followed_user_id] = params[:id]
 
     # フォローしてる人、フォロワー情報、お気に入りしている投稿情報を取得
-    # @follow_list = Follow.find_by_sql('select * from follows LEFT JOIN users ON follows.following_user_id = users.id where followed_user_id=($1) ORDER BY follow.id ASC;',params[:id])
-    # @follower_list = db.exec('select * from follows LEFT JOIN users ON follows.follower_user_id = users.user_id where follow_user_id=($1) ORDER BY follow_user_id ASC;',params[:id])
-    # @like_list = db.exec('select * from likes LEFT JOIN posts ON likes.post_id = posts.id where likes.user_id=($1) ORDER BY like_id ASC;',[params['user_id']])
+    followed_user_ids = Follow.where(following_user_id: params[:id]).pluck(:followed_user_id)
+    @follow_list = User.find(followed_user_ids)
+
+    following_user_ids = Follow.where(followed_user_id: params[:id]).pluck(:following_user_id)
+    @follower_list = User.find(following_user_ids)
+
+    like_post_ids = Like.where(user_id: params[:id]).pluck(:post_id)
+    @like_list = Post.find(like_post_ids)
+
+    # タイムライン（フォローしている人の投稿一覧）を取得
+    timeline_post_ids = Follow.where(following_user_id: params[:id]).pluck(:followed_user_id)
+    @post_list = Post.where(user_id: timeline_post_ids )
+
+    # フォロー数と、フォロワー数、お気に入り投稿数をカウント
+    @follow_count = Follow.where(following_user_id: params[:id]).count
+    @follower_count = Follow.where(followed_user_id: params[:id]).count
+    @like_count = Like.where(user_id: params[:id]).count
 
   end
 
