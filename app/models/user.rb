@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :posts
   # userはたくさんのcommentを持っている
   has_many :comments
+  # userはたくさんのfollowを持っている
+  # has_many :follows
 
   # 画像アップロード機能
   mount_uploader :image, ImageUploader
