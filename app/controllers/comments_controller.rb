@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
         comment_image: comment_params[:comment_image],
         post_id: cookies[:post_id], #app/controllers/posts_controller.rb からcookies[:post_id]を受け取る
         user_id: current_user.id)
-    flash[:success] = 'コメントを投稿しました'
+    flash[:success] = '口コミを投稿しました'
     redirect_to post_path(cookies[:post_id])
   end
 
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
   def update
     comment = Comment.find(params[:id])
     comment.update(comment_params)
-    flash[:success] = 'コメントを更新しました'
+    flash[:success] = '口コミを更新しました'
     redirect_to post_path(cookies[:post_id])
   end
 
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     comment.delete
-    flash[:danger] = 'コメントを削除しました'
+    flash[:danger] = '口コミを削除しました'
     redirect_to post_path(cookies[:post_id])
 
   end
