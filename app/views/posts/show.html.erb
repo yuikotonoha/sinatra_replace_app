@@ -6,7 +6,8 @@
   <div class="col-md-4">
     <div class="product_detail text-center">
       <%= image_tag @post.product_image_url(:thumb) %>
-      <p class="like"><a href='/like/<%= @post_id %>/<%= @user_id %>'>♥</a><%= @like_count %></p>
+      <p class="like"><%= link_to "♥", "/likes/#{@post.id}" %><%= @like_count %></p>
+
     </div>
   </div>
   <div class="col-md-8">
@@ -19,9 +20,11 @@
     </div>
     <div class="buttons text-center">
       <% if @like_check.nil? %>
-        <a class="btn btn-lg btn-outline-success" href="/likes/<%= @post.id %>"><i class="far fa-heart"></i>お気に入り登録</a>
+        <%= link_to "お気に入り登録", "/likes/#{@post.id}", :class => "btn btn-lg btn-outline-success far fa-heart" %>
       <% else %>
-        <a class="btn btn-lg btn-success" href="/like/<%= @post_id %>/<%= @user_id %>"><i class="fas fa-heart"></i>お気に入り登録中</a>
+        <%= link_to "/likes/#{@post.id}", :class => "btn btn-lg btn-success" do %>
+          <i class="fas fa-heart"></i>お気に入り登録中
+        <% end %>
       <% end %>
     </div>
   </div>

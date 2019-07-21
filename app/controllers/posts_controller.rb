@@ -11,7 +11,12 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @comments = Comment.where(post_id: params[:id])
     @comment = Comment.new
-    # binding.pry
+
+    # お気に入りしているか判定
+    @like_check = Like.find_by(post_id: cookies[:post_id], user_id: current_user.id)
+
+    # お気に入りの数をカウント
+    @like_count = Like.where(post_id: params[:id]).count
 
     #今見ている商品の口コミが投稿された場合、comment_controllerにpost_idを渡すための処理
     cookies[:post_id] = params[:id]
