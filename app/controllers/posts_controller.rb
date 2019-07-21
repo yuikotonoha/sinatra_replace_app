@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   # 商品一覧を取得しインスタンス変数に代入
   def index
     @posts = Post.all
-    # binding.pry
   end
 
   # 商品の詳細画面を表示

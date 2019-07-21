@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   # 新しいコメントオブジェクト作成
   def new
     @comment = Comment.new
-    # binding.pry
   end
 
   # 新しいコメントをテーブルに保存
@@ -28,7 +27,6 @@ class CommentsController < ApplicationController
 
   # 口コミ内容を更新
   def update
-    # binding.pry
     comment = Comment.find(params[:id])
     comment.update(comment_params)
     redirect_to post_path(cookies[:post_id])
@@ -36,7 +34,6 @@ class CommentsController < ApplicationController
 
   # 口コミを削除
   def destroy
-    # binding.pry
     comment = Comment.find(params[:id])
     comment.delete
     redirect_to post_path(cookies[:post_id])

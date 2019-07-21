@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   # お気に入り追加・削除
   get '/likes/:id', to: 'likes#touch'
 
+  # フォロー・アンフォロー
+  get '/follow/action', to: 'follows#touch'
+
   resources :users, only: [:index,:show]
 
 end

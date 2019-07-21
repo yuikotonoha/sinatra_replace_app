@@ -2,23 +2,33 @@
   <div class="icon text-center">
     <%= image_tag @user.image_url(:thumb) %>
   </div>
+
   <div class="name text-center">
     <h1><%= @user.nickname %></h1>
   </div>
 
-  <div class="text-center">
+  <!--  今見ているユーザーが、currentuserなのか判定-->
   <% if current_user.id.to_s == params[:id] %>
-    <button type="button" class="btn btn-secondary">
+    <div class="text-center">
+      <button type="button" class="btn btn-secondary">
         <%= link_to "プロフィールを編集する", edit_user_registration_path %>
-    </button>
+      </button>
+    </div>
+  <% else %>
+    <!--    フォローしているかの判定-->
+    <% if @follow_check.nil? %>
+      <div class="text-center">
+        <%= link_to "フォローする", "/follow/action", :class => "btn btn-primary" %>
+      </div>
+    <% else %>
+      <div class="text-center">
+        <%= link_to "フォロー中", "/follow/action", :class => "btn btn-danger" %>
+      </div>
+    <% end %>
   <% end %>
 
-<!--    <button type="button" class="btn btn-secondary">-->
-    <%#= link_to "削除する", "/users", method: :delete, data: {confirm: "ユーザーを削除しますか?"} %>
-<!--    </button>-->
-
-  </div>
 </div>
+
 
 <!-- 投稿一覧 -->
 <div class="text-center mt-5 mb-5">
