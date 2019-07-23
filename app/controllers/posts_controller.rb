@@ -2,7 +2,24 @@ class PostsController < ApplicationController
 
   # 商品一覧を取得しインスタンス変数に代入
   def index
-    @posts = Post.all
+    # @posts = Post.all
+    post_search = PostSearch.new(params_post_search)
+    @posts = post_search.execute
+
+  end
+
+
+  # Ransack用index
+  # def index
+  #   @q = Post.ransack(params[:q])
+  #   @posts = @q.result(distinct: true)
+  # end
+
+
+  # 商品を検索
+  def search
+    post_search = PostSearch.new(params_post_search)
+    @posts = post_search.execute
   end
 
   # 商品の詳細画面を表示
@@ -66,10 +83,16 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
 
+
+
     private
 
     def post_params
       params.require(:post).permit(:title, :category, :product_image, :product_link)
+    end
+
+    def params_post_search
+      params.permit(:search_title)
     end
 
 end

@@ -2,8 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'posts#index'
+
+  # Ransack用
+  get '/search', to: 'posts#search'
+
   resources :posts
   resources :comments
+
+  # 女装アイテム検索機能
+
 
   # お気に入り追加・削除
   get '/likes/:id', to: 'likes#touch'
