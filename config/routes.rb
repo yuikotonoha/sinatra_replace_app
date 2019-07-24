@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   # Ransack用
-  get '/search', to: 'posts#search'
+  get '/index', to: 'posts#index'
 
   resources :posts
   resources :comments

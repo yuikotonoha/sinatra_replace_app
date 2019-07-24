@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   # postはたくさんのcommentを持っている
   has_many :comments
 
+  has_many :likes
+
   # 画像アップロード機能
   mount_uploader :product_image, ProductimageUploader #さっき作ったクラス名！
 

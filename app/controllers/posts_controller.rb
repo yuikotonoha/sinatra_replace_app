@@ -1,19 +1,18 @@
 class PostsController < ApplicationController
 
   # 商品一覧を取得しインスタンス変数に代入
-  def index
-    # @posts = Post.all
-    post_search = PostSearch.new(params_post_search)
-    @posts = post_search.execute
-
-  end
+  # def index
+  #   @posts = Post.all
+  # end
 
 
   # Ransack用index
-  # def index
-  #   @q = Post.ransack(params[:q])
-  #   @posts = @q.result(distinct: true)
-  # end
+  def index
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true)
+    @category = Post.group(:category)
+    # binding.pry
+  end
 
 
   # 商品を検索
@@ -78,7 +77,8 @@ class PostsController < ApplicationController
   def destroy
     # binding.pry
     post = Post.find(params[:id])
-    post.delete
+    post.destroy
+
     flash[:danger] = '女装アイテムを削除しました'
     redirect_to root_path
   end
@@ -86,11 +86,12 @@ class PostsController < ApplicationController
 
 
     private
-
+    # 投稿された内容のStrong Parameters
     def post_params
       params.require(:post).permit(:title, :category, :product_image, :product_link)
     end
 
+    # 検索機能のStrong Parameters
     def params_post_search
       params.permit(:search_title)
     end
