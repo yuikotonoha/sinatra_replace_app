@@ -2,9 +2,7 @@
 <% if user_signed_in? %>
 
   <%= search_form_for @q do |f| %>
-
-    <%#= f.label :title_cont %>
-    <%= f.search_field :title_cont %>
+    <%#= f.search_field :title_cont %>
     <%= f.collection_select(:category_cont, @category, :category, :category, :include_blank => true) %>
     <%= f.submit %>
   <% end %>

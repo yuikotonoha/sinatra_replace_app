@@ -13,6 +13,7 @@
   <div class="col-md-8">
     <h3 class="pt-3 pb-3 text-center"><%= @post.title %></h3>
     <p class="text-center">カテゴリ：<%= @post.category %></p>
+    <p class="text-center">投稿者：<%= @post.user.nickname %></p>
     <div class="buttons text-center mb-3">
       <%= link_to @post.product_link, class: "btn btn-lg btn-outline-warning" do %>
         <i class="fab fa-amazon"></i>Amazonで詳しく見る

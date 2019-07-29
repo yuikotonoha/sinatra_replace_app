@@ -2,10 +2,9 @@ class Post < ApplicationRecord
   # postは1人のユーザーに所属する
   belongs_to :user
 
-  # postはたくさんのcommentを持っている
-  has_many :comments
-
-  has_many :likes
+  # postはたくさんのcomment,likesを持っている
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   # 画像アップロード機能
   mount_uploader :product_image, ProductimageUploader #さっき作ったクラス名！
