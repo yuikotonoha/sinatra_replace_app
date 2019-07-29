@@ -206,3 +206,13 @@ input[type=file] {
     margin: 0;
     padding: 0;
 }
+
+/*20190730テストCSS*/
+.follow_user_image{
+    background-color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.d-inline-block{
+    width: 80px;
+}

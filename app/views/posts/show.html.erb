@@ -43,7 +43,7 @@
     <div class="col-md-6 mb-3">
       <div class=" posts-content">
 
-        <p>口コミ投稿日時：<%= comment.created_at  %></p>
+        <p>口コミ投稿日時：<%= comment.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[comment.created_at.wday]}) %H:%M") %></p>
         <h4 class="mb-3">評価：<%= comment.score %>点</h4>
         <p><%= simple_format(comment.comment_text) %></p>
         <% unless comment.comment_image.blank? %>

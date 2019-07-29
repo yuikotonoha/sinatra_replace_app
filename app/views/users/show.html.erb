@@ -80,12 +80,18 @@
     <% end %>
   </div>
   <!-- フォローした人の投稿をタイムラインとして表示 -->
-  <div id="tab4" class="tab-pane">
+  <div id="tab4" class="tab-pane row">
     <% @post_list.each do |post| %>
       <div class="follow_user_image p-2">
-        <%= image_tag post.user.image_url(:thumb), :width => "75" %>
+        <div class="d-inline-block align-middle">
+          <%= link_to user_path(post.user_id) do %>
+            <%= image_tag post.user.image_url(:thumb), :width => "75" %>
+            <p><%= post.user.nickname %></p>
+          <% end %>
+        </div>
         <%= link_to post_path(post) do %>
           <div class="balloon1-left">
+            <p>投稿日：<%= post.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[post.created_at.wday]}) %H:%M") %></p>
             <p><%= post.title %></p>
             <%= image_tag post.product_image_url(:thumb), :width => "75" %>
           </div>
@@ -93,6 +99,7 @@
       </div>
     <% end %>
   </div>
+
 </div>
 
 <!-- 投稿一覧 -->
