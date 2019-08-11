@@ -42,6 +42,8 @@ gem 'activeadmin'
 gem 'ransack'
 gem 'carrierwave'
 gem 'rmagick'
+# 8月1日追加
+# gem 'bootstrap-sass'
 
 # devise日本語化
 gem 'devise-i18n'

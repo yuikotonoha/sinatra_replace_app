@@ -7,14 +7,14 @@
   <!-- ここから -->
   <!--  ニックネーム入力欄-->
   <div class="field">
-    <%= f.label :nickname %> <em>(10 characters maximum)</em><br />
+    <%= f.label :nickname, "ニックネーム" %> <em>(10 文字以内)</em><br />
     <%= f.text_field :nickname, autofocus: true, maxlength: "10" ,:size=>"30" %>
   </div>
   <!-- ここまで -->
 
   <!--  プロフィール画像設定 ここから-->
   <div class="field">
-    <%= f.label :image %> <em>(profile image)</em><br />
+    <%= f.label :image, "プロフィール画像" %> <em>(profile image)</em><br />
     <%= f.file_field :image %>
   </div>
   <!--  プロフィール画像設定 ここまで-->
@@ -27,7 +27,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 文字以上で設定)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>

@@ -45,13 +45,18 @@ class PostsController < ApplicationController
   # postで投げられたデータを受け取る
   def create
     # binding.pry
-    Post.create(
-        title: post_params[:title],
-        category: post_params[:category],
-        product_image: post_params[:product_image],
-        user_id: current_user.id)
-    flash[:success] = '女装アイテムを投稿しました'
-    redirect_to root_path
+      @post = Post.create(
+              title: post_params[:title],
+              category: post_params[:category],
+              product_image: post_params[:product_image],
+              user_id: current_user.id)
+    if @post.save
+      flash[:success] = '女装アイテムを投稿しました'
+      redirect_to root_path
+    else
+      flash[:danger] = '女装アイテムの投稿に失敗しました'
+      redirect_to root_path
+    end
   end
 
   # 商品編集画面に移動
